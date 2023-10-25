@@ -1,0 +1,47 @@
+{
+  "persons": [
+    {
+      "name": "Alice",
+      "age": 31,
+      "employed": false
+    },
+    {
+      "name": "Bob",
+      "married": true
+    },
+    {
+      "name": "Charlie",
+      "age": 26
+    },
+    {
+      "name": "David",
+      "employed": false
+    },
+    {
+      "name": "Eve",
+      "married": false
+    },
+    {
+      "name": "Fay",
+      "age": 38,
+      "employed": false
+    },
+    {
+      "name": "Grace",
+      "age": 46
+    },
+    {
+      "name": "Heidi",
+      "married": true,
+      "employed": true
+    },
+    {
+      "name": "Ivy",
+      "age": 22
+    },
+    {
+      "name": "Judy",
+      "employed": true
+    }
+  ]
+}
