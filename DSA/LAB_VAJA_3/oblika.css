@@ -1,0 +1,36 @@
+
+body {
+    background-color: gray;
+  }
+  
+
+  h1 {
+    font-size: 24px;
+    color: red;
+  }
+  
+  h2 {
+    color: black;
+  }
+  
+  
+  p {
+    font-size: 16px;
+    color: blue;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline;
+  }
+  
+ 
+  .bordered {
+    border: 5px solid black;
+    padding: 8px;
+    margin: 50px;
+  }
+  
+  
+  ul {
+    list-style-type: square;
+  }
+  
