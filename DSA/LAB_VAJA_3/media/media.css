@@ -1,0 +1,29 @@
+/* Spletni slog za oblikovanje strani */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    color: #333;
+}
+
+/* Dodatno oblikovanje SVG kroga */
+circle {
+    stroke: black;
+    stroke-width: 2;
+}
+
+/* Oblikovanje avdio in video predvajalnikov */
+audio, video {
+    margin: 20px;
+    background-color: #fff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Oblikovanje vdelanega YouTube predvajalnika */
+iframe {
+    margin: 20px;
+    border: none;
+}
