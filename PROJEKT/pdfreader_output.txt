@@ -1,0 +1,18 @@
+pdfreader output:
+
+{
+'query': 'summarize the text', 'result': 
+	
+	'The main contributions of the article are:
+		
+		1. Identification of failure evaluation as a common kernel to enhance current large-scale robust network design problems.
+		2. Development of a GAT-based failure evaluation function that considers network topology, traffic demand, routing 			   decisions, and target failure scenarios.
+		3. Expected applications of the proposed approach in various domains.'
+}
+
+{
+'query': "what's GAT-based failure evaluation function", 'result': 
+	'Based on the provided context, the GAT-based failure evaluation function is a machine learning-based approach that estimates the 	impact of failures in a network. The function takes into account the network topology, traffic demand, and routing decisions as 	input, and outputs predicted impact of the target failure scenarios. The goal of this function is to help identify a small subset of 	critical failure scenarios from the full set of possible failure scenarios, based on their predicted impact.
+
+	The GAT-based failure evaluation function is designed to have good generalization to unseen network topologies, traffic demands, 	different failure types, and other possible application scenarios. This means that the function can adapt to new situations and 	accurately estimate the impact of failures in a network.'
+}
