@@ -1,0 +1,25 @@
+
+install cuda on windows
+
+install ollama   >>>> olama verzija:  ollama run dolphin-mixtral:latest   runa sam na ramu - cpu
+
+istal llm
+
+cuda for wscuDNN for ubuntu version check          
+					
+					echo 'export PATH=/usr/local/cuda/bin:$PATH' >> ~/.bashrc
+                                        echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+                                        source ~/.bashrc
+					
+					nvidia-smi
+					nvcc --version
+
+
+docker exec -it ollama ollama run llama2
+
+
+# Activate the virtual environment
+source env/bin/activate
+
+# Deactivate the virtual environment
+source env/bin/deactivate

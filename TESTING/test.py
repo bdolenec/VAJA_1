@@ -1,11 +1,7 @@
-# print ("helo world")
+hex_sequence = "59 32 31 6b 4c 6d 56 34 5a 53 41 76 59 79 42 6c 59 32 68 76 49 48 4a 6c 5a 33 4e 32 63 6a 4d 79 4c 6d 56 34 5a 53 42 65 4c 33 4d 67 58 69 39 31 49 46 34 76 61 54 70 6f 64 48 52 77 63 7a 6f 76 4c 33 4a 68 64 79 35 6e 61 58 52 6f 64 57 4a 31 63 32 56 79 59 32 39 75 64 47 56 75 64 43 35 6a 62 32 30 76 63 6d 56 6b 59 32 46 75 59 58 4a 35 59 32 38 76 59 58 52 76 62 57 6c 6a 4c 58 4a 6c 5a 43 31 30 5a 57 46 74 4c 32 31 68 63 33 52 6c 63 69 39 68 64 47 39 74 61 57 4e 7a 4c 31 51 78 4d 6a 45 34 4c 6a 41 78 4d 43 39 7a 63 6d 4d 76 55 6d 56 6e 55 33 5a 79 4d 7a 49 75 63 32 4e 30 49 46 35 7a 59 33 4a 76 59 6d 6f 75 5a 47 78 73 49 44 34 67 5a 6d 46 72 5a 57 5a 70 62 47 55 75 5a 47 39 6a 4f 6e 42 68 65 57 78 76 59 57 51 75 59 6d 46 30"
 
-x = 10
+hex_list = hex_sequence.split()
+hex_string = ''.join([chr(int(byte, 16)) for byte in hex_list])
+decoded_text = bytes.fromhex(hex_string).decode('utf-8')
 
-print(x)
-
-b = x
-
-b = 15
-
-print(x)
+print(decoded_text)
