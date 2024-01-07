@@ -23,7 +23,7 @@ Tu bom opisal kako sem sam prišel do rezultatov na mojem sistemu Windows 11. Za
 
 ## Omogočanje Funkcije WSL
 
-WSl(windows subsystem for linux) je funkcionalnost windows operacijskega sistema ki omogoča poganjanje različnih linux distribucij lokalno v windowsih. več si lahko preberete na tej strani: *https://learn.microsoft.com/en-us/windows/wsl/about*
+Wsl(windows subsystem for linux) je funkcionalnost windows operacijskega sistema ki omogoča poganjanje različnih linux distribucij lokalno v windowsih. več si lahko preberete na tej strani: *https://learn.microsoft.com/en-us/windows/wsl/about*
 
  - potrebujete windows 10 ali 11
  - zaženite powershell kot administrator in vpišite komando: 
