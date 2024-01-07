@@ -23,42 +23,43 @@ Tu bom opisal kako sem sam prišel do rezultatov na mojem sistemu Windows 11. Za
 
 ## Omogočanje Funkcije WSL
 
-WSl(windows subsystem for linux) je funkcionalnost windows operacijskega sistema ki omogoča poganjanje različnih linux distribucij lokalno v windowsih. več si lahko preberete na tej strani: 
-https://learn.microsoft.com/en-us/windows/wsl/about
+WSl(windows subsystem for linux) je funkcionalnost windows operacijskega sistema ki omogoča poganjanje različnih linux distribucij lokalno v windowsih. več si lahko preberete na tej strani: *https://learn.microsoft.com/en-us/windows/wsl/about*
 
  - potrebujete windows 10 ali 11
- - zaženite powershell kot administrator in vpišite komando: 'wsl --install'
+ - zaženite powershell kot administrator in vpišite komando: 
+ ```bash
+ wsl --install
+ ```
  - ko je inštalacije konec resetirajte sistem
- - 'wsl --set-default-version 2' obstajata dve verziji, wsl2 je novejša
+ - wsl --set-default-version 2 obstajata dve verziji, wsl2 je novejša
  - win + R in vpišite optional features 
  - v optional features obkljukajte windows subsystem for linux, Hypervisor, Hyper-V, Virtual machine platform
- - 'wsl --list --online' izpiše trenutne linux distribucije ki so omogočene za inštalacijo
- - 'wsl --install -d <DistroName>' inštaliramo željeno distribucijo, priporočano: ubuntu
- - 'wsl --shutdown' ugasne wsl 'wsl.exe' požene wsl. 'wsl --help' za več pomoči
- - 'wsl -l -v' preveri delovanje wsl
- - https://learn.microsoft.com/en-us/windows/wsl/install za dodatno pomoč
+ - wsl --list --online izpiše trenutne linux distribucije ki so omogočene za inštalacijo
+ - wsl --install -d |DistroName| inštaliramo željeno distribucijo, priporočano: ubuntu
+ - wsl --shutdown ugasne wsl wsl.exe požene wsl. wsl --help za več pomoči
+ - wsl -l -v preveri delovanje wsl
+ - *https://learn.microsoft.com/en-us/windows/wsl/install* za dodatno pomoč
 
 ## Nvidia CUDA
 
 v tem koraku omogočimo deljenje resursov nvidia grafične kartice okolju WSL Ubuntu z Nvidia CUDA in CUDA Tool kit
 
-inštalacija cude za windows in wsl:
-https://docs.nvidia.com/cuda/wsl-user-guide/index.html
+inštalacija cude za windows in wsl: *https://docs.nvidia.com/cuda/wsl-user-guide/index.html*
 
 CUDA toolkit za Ubuntu Wsl:
-- wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
-- sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
-- wget https://developer.download.nvidia.com/compute/cuda/12.3.2/local_installers/cuda-repo-wsl-ubuntu-12-3-local_12.3.2-1_amd64.deb
-- sudo dpkg -i cuda-repo-wsl-ubuntu-12-3-local_12.3.2-1_amd64.deb
-- sudo cp /var/cuda-repo-wsl-ubuntu-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
-- sudo apt-get update
-- sudo apt-get -y install cuda-toolkit-12-3
+ - wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
+ - sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
+ - wget https://developer.download.nvidia.com/compute/cuda/12.3.2/local_installers/cuda-repo-wsl-ubuntu-12-3-local_12.3.2-1_amd64.deb
+ - sudo dpkg -i cuda-repo-wsl-ubuntu-12-3-local_12.3.2-1_amd64.deb
+ - sudo cp /var/cuda-repo-wsl-ubuntu-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
+ - sudo apt-get update
+ - sudo apt-get -y install cuda-toolkit-12-3
 
-- za dodatne informacije: https://developer.nvidia.com/cuda-downloads
+za dodatne informacije: https://developer.nvidia.com/cuda-downloads
 
 za preverjanje inštalacije:
-- 'nvidia-smi'
-- 'nvcc --version'
+ - 'nvidia-smi'
+ - 'nvcc --version'
 
 debug:
 - echo 'export PATH=/usr/local/cuda/bin:$PATH' >> ~/.bashrc
@@ -147,7 +148,7 @@ Z inštalacijo Langchaina se inštalira zraven tudi veliko 'python dependecies' 
 - 'pip install langchain' potegnemo langchain
 - 'pip -r install requirements.txt' če imamo težavo z dependencies mormao izvesti še ta korak
 
-- bralec ki povzame spletne strani:
+### bralec ki povzame spletne strani:
 
     
         # Uvoz potrebnih modulov iz knjižnice LANGCHAIN
@@ -171,7 +172,7 @@ Z inštalacijo Langchaina se inštalira zraven tudi veliko 'python dependecies' 
         print(result)
         
 
-- bralec spletnih strani katerega lahko vprašaš vsebinska uprašanja
+### bralec spletnih strani katerega lahko vprašaš vsebinska uprašanja
 
 
         from langchain.llms import Ollama
@@ -202,7 +203,7 @@ Z inštalacijo Langchaina se inštalira zraven tudi veliko 'python dependecies' 
         print(result)
  
 
-- Bralec pdf dokumentov, ki jih povzame:
+### Bralec pdf dokumentov, ki jih povzame:
 
         
         from langchain.llms import Ollama
@@ -238,7 +239,7 @@ Z inštalacijo Langchaina se inštalira zraven tudi veliko 'python dependecies' 
         result = qachain({"query": question})
         print(result)
 
-- spletni grafični vmesnik (web gui)
+### spletni grafični vmesnik (web gui)
 
 
         # Uvoz potrebnih knjižnic
@@ -290,4 +291,4 @@ Z inštalacijo Langchaina se inštalira zraven tudi veliko 'python dependecies' 
         # Zaženi vmesnik
         iface.launch()
     
-- vse skripte lahko poženemo z komando 'python3 <ime datoteke s kodo>'
+vse skripte lahko poženemo z komando 'python3 <ime datoteke s kodo>'
