@@ -1,5 +1,5 @@
 
-## **Jezikovni Modeli v Praksi: Modificiranje in uporaba velikih jezikovnih modelov z OLLAMA**
+# *Jezikovni Modeli v Praksi: Modificiranje in uporaba velikih jezikovnih modelov z OLLAMA*
 
 ![AI](robot.jpg)
 
@@ -57,8 +57,8 @@ CUDA toolkit za Ubuntu Wsl:
 - za dodatne informacije: https://developer.nvidia.com/cuda-downloads
 
 za preverjanje inštalacije:
-- **nvidia-smi**
-- **nvcc --version**
+- *nvidia-smi*
+- *nvcc --version*
 
 debug:
 - echo 'export PATH=/usr/local/cuda/bin:$PATH' >> ~/.bashrc
@@ -70,9 +70,9 @@ debug:
 Sedaj lahko inštaliramo ollama. 
 ollama je terminalna aplikacija ki vključuje vse zahtevane knjižnice ki so potrebne za zagon LLM-ov lokalno, in poenostavi interakcijo, inštaliranje, in modificiranje LLM-ov
 
-- **curl https://ollama.ai/install.sh | sh** inštalira ollama
-- **ollama serve** zašene proces ki se izvaja lokalno in je serviran na localhost:11434 po defoltu
-- pomoč za ollama **ollama** :
+- *curl https://ollama.ai/install.sh | sh* inštalira ollama
+- *ollama serve* zašene proces ki se izvaja lokalno in je serviran na localhost:11434 po defoltu
+- pomoč za ollama *ollama* :
         '''
         Usage:
         ollama [flags]
