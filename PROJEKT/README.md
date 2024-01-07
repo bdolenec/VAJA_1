@@ -57,8 +57,8 @@ wsl -l -v
 V tem koraku omogočimo deljenje resursov nvidia grafične kartice okolju WSL Ubuntu z Nvidia CUDA in CUDA Tool kit
 
  - Inštalacija cude za windows in wsl: *https://docs.nvidia.com/cuda/wsl-user-guide/index.html*
+ - CUDA toolkit za Ubuntu Wsl:
 ```bash
-CUDA toolkit za Ubuntu Wsl:
 wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
 sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
 wget https://developer.download.nvidia.com/compute/cuda/12.3.2/local_installers/cuda-repo-wsl-ubuntu-12-3-local_12.3.2-1_amd64.deb
@@ -341,3 +341,6 @@ vse skripte lahko poženemo z komando
 ```bash
 python3 <ime datoteke s kodo>
 ```
+
+
+### ljubim te neža <3
