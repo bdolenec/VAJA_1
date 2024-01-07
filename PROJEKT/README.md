@@ -58,55 +58,66 @@ v tem koraku omogočimo deljenje resursov nvidia grafične kartice okolju WSL Ub
 
 inštalacija cude za windows in wsl: *https://docs.nvidia.com/cuda/wsl-user-guide/index.html*
 
+```bash
 CUDA toolkit za Ubuntu Wsl:
- - wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
- - sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
- - wget https://developer.download.nvidia.com/compute/cuda/12.3.2/local_installers/cuda-repo-wsl-ubuntu-12-3-local_12.3.2-1_amd64.deb
- - sudo dpkg -i cuda-repo-wsl-ubuntu-12-3-local_12.3.2-1_amd64.deb
- - sudo cp /var/cuda-repo-wsl-ubuntu-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
- - sudo apt-get update
- - sudo apt-get -y install cuda-toolkit-12-3
+wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
+sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget https://developer.download.nvidia.com/compute/cuda/12.3.2/local_installers/cuda-repo-wsl-ubuntu-12-3-local_12.3.2-1_amd64.deb
+sudo dpkg -i cuda-repo-wsl-ubuntu-12-3-local_12.3.2-1_amd64.deb
+sudo cp /var/cuda-repo-wsl-ubuntu-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cuda-toolkit-12-3
+```
 
-za dodatne informacije: https://developer.nvidia.com/cuda-downloads
+za dodatne informacije: *https://developer.nvidia.com/cuda-downloads*
 
 za preverjanje inštalacije:
- - 'nvidia-smi'
- - 'nvcc --version'
-
+```bash
+nvidia-smi
+nvcc --version
+```
 debug:
-- echo 'export PATH=/usr/local/cuda/bin:$PATH' >> ~/.bashrc
-- echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
-- source ~/.bashrc
+```bash
+echo 'export PATH=/usr/local/cuda/bin:$PATH' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
+```
 
 ## OLLAMA
 
 Sedaj lahko inštaliramo ollama. 
 ollama je terminalna aplikacija ki vključuje vse zahtevane knjižnice ki so potrebne za zagon LLM-ov lokalno, in poenostavi interakcijo, inštaliranje, in modificiranje LLM-ov
 
-- 'curl https://ollama.ai/install.sh | sh' inštalira ollama
-- 'ollama serve' zašene proces ki se izvaja lokalno in je serviran na localhost:11434 po defoltu
+- inštalira ollama
+```bash
+curl https://ollama.ai/install.sh | sh
+```
+- zašene proces ki se izvaja lokalno in je serviran na localhost:11434 po defoltu
+```bash
+ollama serve
+```
 - pomoč za ollama:
+```bash
+Usage:
+ollama [flags]
+ollama [command]
 
-        Usage:
-        ollama [flags]
-        ollama [command]
+Available Commands:
+serve       Start ollama
+create      Create a model from a Modelfile
+show        Show information for a model
+run         Run a model
+pull        Pull a model from a registry
+push        Push a model to a registry
+list        List models
+cp          Copy a model
+rm          Remove a model
+help        Help about any command
 
-        Available Commands:
-        serve       Start ollama
-        create      Create a model from a Modelfile
-        show        Show information for a model
-        run         Run a model
-        pull        Pull a model from a registry
-        push        Push a model to a registry
-        list        List models
-        cp          Copy a model
-        rm          Remove a model
-        help        Help about any command
-
-        Flags:
-        -h, --help      help for ollama
-        -v, --version   Show version information
-        
+Flags:
+-h, --help      help for ollama
+-v, --version   Show version information
+```
 ## uporaba ollama
 
 sedaj lahko začnemo uporabljati ollama
