@@ -31,13 +31,25 @@ WSl(windows subsystem for linux) je funkcionalnost windows operacijskega sistema
  wsl --install
  ```
  - ko je inštalacije konec resetirajte sistem
- - wsl --set-default-version 2 obstajata dve verziji, wsl2 je novejša
+ - obstajata dve verziji, wsl2 je novejša:
+```bash
+wsl --set-default-version 2 
+```
  - win + R in vpišite optional features 
  - v optional features obkljukajte windows subsystem for linux, Hypervisor, Hyper-V, Virtual machine platform
- - wsl --list --online izpiše trenutne linux distribucije ki so omogočene za inštalacijo
- - wsl --install -d |DistroName| inštaliramo željeno distribucijo, priporočano: ubuntu
- - wsl --shutdown ugasne wsl wsl.exe požene wsl. wsl --help za več pomoči
- - wsl -l -v preveri delovanje wsl
+ - izpiše trenutne linux distribucije ki so omogočene za inštalacijo:
+```bash
+wsl --list --online
+```
+ - inštaliramo željeno distribucijo, priporočeno: ubuntu
+```bash
+wsl --install -d Ubuntu
+```
+ - preveri delovanje wsl:
+```bash
+wsl -l -v
+```
+ - **'wsl --shutdown'** ugasne wsl **'wsl.exe'** požene wsl. **'wsl --help'** za več pomoči
  - *https://learn.microsoft.com/en-us/windows/wsl/install* za dodatno pomoč
 
 ## Nvidia CUDA
