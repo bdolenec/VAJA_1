@@ -84,11 +84,11 @@ source ~/.bashrc
 
 Sedaj lahko inštaliramo ollama. Ollama je terminalna aplikacija ki vključuje vse zahtevane knjižnice ki so potrebne za zagon LLM-ov lokalno, in poenostavi interakcijo, inštaliranje, in modificiranje LLM-ov
 
- - inštalira ollama
+ - inštalira ollama:
 ```bash
 curl https://ollama.ai/install.sh | sh
 ```
- - zašene proces ki se izvaja lokalno in je serviran na localhost:11434 po defoltu
+ - zažene proces ki se izvaja lokalno in je serviran na localhost:11434 po defoltu:
 ```bash
 ollama serve
 ```
@@ -341,6 +341,3 @@ vse skripte lahko poženemo z komando
 ```bash
 python3 <ime datoteke s kodo>
 ```
-
-
-### ljubim te neža <3
