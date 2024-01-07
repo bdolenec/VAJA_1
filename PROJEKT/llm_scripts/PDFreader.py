@@ -5,33 +5,28 @@ from langchain.embeddings import OllamaEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.chains import RetrievalQA
 
-# Initialize the Ollama model
+# Inicializacija OLLAMA modela
 ollama = Ollama(base_url='http://localhost:11434', model="LLAMA2_22_11_512")
 
-# Load the PDF document using PyPDFLoader
+# Naloži pdf dokument
 pdf_loader = PyPDFLoader("/home/user/mashinlerning/Machine_Learning_for_Robust_Network_Design_A_New_Perspective.pdf")
 data = pdf_loader.load()
 
-# Split the documents using RecursiveCharacterTextSplitter
+# Zaradi dolžine teksta, tega dokumenta nemoremo naenkrat sprocesirati, zato tekst presekamo na več delov
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=20)
 all_splits = text_splitter.split_documents(data)
 
-# Create OllamaEmbeddings
 oembed = OllamaEmbeddings(base_url="http://localhost:11434", model="LLAMA2_22_11_512")
-
-# Create Chroma vectorstore from documents
 vectorstore = Chroma.from_documents(documents=all_splits, embedding=oembed)
 
-# Define the question for QA
-question = "write a 20 page seminar based on the text provided."
+# Uprašanja za model na podlagi danega teksta
+question = "what is a GAT network"
 
-# Perform similarity search for the question
+# Iskanje podobnosti
 docs = vectorstore.similarity_search(question)
 print(f"Similar documents found: {len(docs)}")
-
-# Create RetrievalQA chain
 qachain = RetrievalQA.from_chain_type(ollama, retriever=vectorstore.as_retriever())
 
-# Get the answer for the question
+# Dobljen rezultat ki ga izda LLM
 result = qachain({"query": question})
 print(result)
