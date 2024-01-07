@@ -72,8 +72,9 @@ ollama je terminalna aplikacija ki vključuje vse zahtevane knjižnice ki so pot
 
 - 'curl https://ollama.ai/install.sh | sh' inštalira ollama
 - 'ollama serve' zašene proces ki se izvaja lokalno in je serviran na localhost:11434 po defoltu
-- pomoč za ollama *ollama* :
+- pomoč za ollama:
         '''
+
         Usage:
         ollama [flags]
         ollama [command]
@@ -112,24 +113,23 @@ to naredimo z pomočjo MODELFILE
 - v visual studio code najprej dodamo add-on wsl, nato z klikom na spodnji levi gumb [><] pokonektamo wsl in visual studio
 - v novi mapi naredimo datoteko modelfile
 - primer model fila: 
+        '''
+        FROM llama2:latest #The FROM instruction defines the base model to use when creating a model.
 
-    '''
-    FROM llama2:latest #The FROM instruction defines the base model to use when creating a model.
+        TEMPLATE """[INST] <<SYS>>{{ .System }}<</SYS>>
+        {{ .Prompt }} [/INST]
+        """
 
-    TEMPLATE """[INST] <<SYS>>{{ .System }}<</SYS>>
-    {{ .Prompt }} [/INST]
-    """
+        SYSTEM """<system message>""" # The SYSTEM instruction specifies the system message to be used in the template
 
-    SYSTEM """<system message>""" # The SYSTEM instruction specifies the system message to be used in the template
-
-    PARAMETER stop "[INST]"
-    PARAMETER stop "[/INST]"
-    PARAMETER stop "<<SYS>>"
-    PARAMETER stop "<</SYS>>"
-    PARAMETER num_gpu 22 #The number of layers to send to the GPU(s). 0 > only runs on CPU
-    PARAMETER num_ctx 512 #Sets the size of the context window used to generate the next token
-    PARAMETER num_thread 12 #Sets the number of threads to use during computation
-    '''
+        PARAMETER stop "[INST]"
+        PARAMETER stop "[/INST]"
+        PARAMETER stop "<<SYS>>"
+        PARAMETER stop "<</SYS>>"
+        PARAMETER num_gpu 22 #The number of layers to send to the GPU(s). 0 > only runs on CPU
+        PARAMETER num_ctx 512 #Sets the size of the context window used to generate the next token
+        PARAMETER num_thread 12 #Sets the number of threads to use during computation
+        '''
 - več o modelfiles: https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md
 - modelfile shranimo in v terminal napišemo sledeče:
 - 'ollama create <izbrano ime za nov model> -f ./modelfile'
