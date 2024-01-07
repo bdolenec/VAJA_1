@@ -1,44 +1,44 @@
 
-# *Jezikovni Modeli v Praksi: Modificiranje in uporaba velikih jezikovnih modelov z OLLAMA*
+# Jezikovni Modeli v Praksi: Modificiranje in uporaba velikih jezikovnih modelov z OLLAMA
 
 ![AI](robot.jpg)
 
-# Delovanje Nevronskih Omrežij (Neural Networks)
+## Delovanje Nevronskih Omrežij (Neural Networks)
 
 Nevronska omrežja so računalniški modeli, katerih inspiracija so bili možgani. Temeljijo na vse-povezanosti velikega števila nevronov, ki so povezani med seboj prek uteženih povezav. Te uteži se prilagajajo med učenjem, da omogočajo omrežju, da se prilagaja in uči na podlagi vhodnih podatkov.
 
-# Delovanje LLM (Large Language Models)
+## Delovanje LLM (Large Language Models)
 
 Veliki jezikovni modeli (LLM) so zmogljivi modeli umetne inteligence, ki so usposobljeni za razumevanje in generiranje človeškega jezika. Ti modeli temeljijo na nevronskih mrežah, zlasti na transformacijskih nevronskih mrežah (Transformer). LLM-i so trenirani na velikih količinah besedilnih podatkov, kar jim omogoča, da ustvarjajo besedila, prevajajo jezike, odgovarjajo na vprašanja in še veliko več.
 
-# Delovanje LLM v povezavi s PyTorch, TensorFlow in CUDA
+## Delovanje LLM v povezavi s PyTorch, TensorFlow in CUDA
 
 PyTorch in TensorFlow sta dve najbolj priljubljeni knjižnici za strojno učenje, ki omogočata enostavno ustvarjanje in upravljanje nevronskih omrežij, vključno z LLM-ji. Obe knjižnici zagotavljata orodja za izgradnjo, treniranje in uporabo teh modelov.
 
 CUDA je platforma podjetja Nvidia, ki omogoča pospeševanje izvajanja računalniških operacij z uporabo grafičnih procesnih enot (GPU). PyTorch in TensorFlow podpirata CUDA, kar omogoča hitrejše izvajanje operacij nevronskih omrežij na grafičnih karticah Nvidia, kar bistveno pospeši učenje in delovanje velikih modelov, kot so LLM-ji.
 
-## **Navodila za namestitev in pripravo okolja**
+# **Navodila za namestitev in pripravo okolja**
 
-*Tu bom opisal kako sem sam prišel do rezultatov na mojem sistemu Windows 11. Za ostale sisteme isti postopki ne veljajo zaradi različnosti hardvera in operacisjkih sistemov*
+Tu bom opisal kako sem sam prišel do rezultatov na mojem sistemu Windows 11. Za ostale sisteme isti postopki ne veljajo zaradi različnosti hardvera in operacisjkih sistemov
 
-# Omogočanje Funkcije WSL
+## Omogočanje Funkcije WSL
 
 WSl(windows subsystem for linux) je funkcionalnost windows operacijskega sistema ki omogoča poganjanje različnih linux distribucij lokalno v windowsih. več si lahko preberete na tej strani: 
 https://learn.microsoft.com/en-us/windows/wsl/about
 
  - potrebujete windows 10 ali 11
- - zaženite powershell kot administrator in vpišite komando: **wsl --install**
+ - zaženite powershell kot administrator in vpišite komando: 'wsl --install'
  - ko je inštalacije konec resetirajte sistem
- - **wsl --set-default-version 2** obstajata dve verziji, wsl2 je novejša
+ - 'wsl --set-default-version 2' obstajata dve verziji, wsl2 je novejša
  - win + R in vpišite optional features 
  - v optional features obkljukajte windows subsystem for linux, Hypervisor, Hyper-V, Virtual machine platform
- - **wsl --list --online** izpiše trenutne linux distribucije ki so omogočene za inštalacijo
- - **wsl --install -d <DistroName>** inštaliramo željeno distribucijo, priporočano: ubuntu
- - **wsl --shutdown** ugasne wsl **wsl.exe** požene wsl. **wsl --help** za več pomoči
- - **wsl -l -v** preveri delovanje wsl
+ - 'wsl --list --online' izpiše trenutne linux distribucije ki so omogočene za inštalacijo
+ - 'wsl --install -d <DistroName>' inštaliramo željeno distribucijo, priporočano: ubuntu
+ - 'wsl --shutdown' ugasne wsl 'wsl.exe' požene wsl. 'wsl --help' za več pomoči
+ - 'wsl -l -v' preveri delovanje wsl
  - https://learn.microsoft.com/en-us/windows/wsl/install za dodatno pomoč
 
-# Nvidia CUDA
+## Nvidia CUDA
 
 v tem koraku omogočimo deljenje resursov nvidia grafične kartice okolju WSL Ubuntu z Nvidia CUDA in CUDA Tool kit
 
@@ -57,21 +57,21 @@ CUDA toolkit za Ubuntu Wsl:
 - za dodatne informacije: https://developer.nvidia.com/cuda-downloads
 
 za preverjanje inštalacije:
-- *nvidia-smi*
-- *nvcc --version*
+- 'nvidia-smi'
+- 'nvcc --version'
 
 debug:
 - echo 'export PATH=/usr/local/cuda/bin:$PATH' >> ~/.bashrc
 - echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
 - source ~/.bashrc
 
-# OLLAMA
+## OLLAMA
 
 Sedaj lahko inštaliramo ollama. 
 ollama je terminalna aplikacija ki vključuje vse zahtevane knjižnice ki so potrebne za zagon LLM-ov lokalno, in poenostavi interakcijo, inštaliranje, in modificiranje LLM-ov
 
-- *curl https://ollama.ai/install.sh | sh* inštalira ollama
-- *ollama serve* zašene proces ki se izvaja lokalno in je serviran na localhost:11434 po defoltu
+- 'curl https://ollama.ai/install.sh | sh' inštalira ollama
+- 'ollama serve' zašene proces ki se izvaja lokalno in je serviran na localhost:11434 po defoltu
 - pomoč za ollama *ollama* :
         '''
         Usage:
@@ -94,16 +94,16 @@ ollama je terminalna aplikacija ki vključuje vse zahtevane knjižnice ki so pot
         -h, --help      help for ollama
         -v, --version   Show version information
         '''
-# uporaba ollama
+## uporaba ollama
 
 sedaj lahko začnemo uporabljati ollama
 
-- **ollama run <model>** potegnemo želen model in ga zaženemo. za listo modelov: https://ollama.ai/library
-- **docker exec -it ollama ollama run <model>** ollama podpira tudi docker. kako uporabiti docker: https://ollama.ai/blog/ollama-is-now-available-as-an-official-docker-image
+- 'ollama run <model>' potegnemo želen model in ga zaženemo. za listo modelov: https://ollama.ai/library
+- 'docker exec -it ollama ollama run <model>' ollama podpira tudi docker. kako uporabiti docker: https://ollama.ai/blog/ollama-is-now-available-as-an-official-docker-image
 - če je vse prav se bo izbran model zagnal v terminalu.
 - več o ollama: https://github.com/jmorganca/ollama/tree/main , https://ollama.ai 
 
-# modificiranje modelov
+## modificiranje modelov
 
 Modele lahko modificiramo in upravljamo z količino resorsov ki jih model lahko uporablja.
 
@@ -132,8 +132,8 @@ to naredimo z pomočjo MODELFILE
     '''
 - več o modelfiles: https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md
 - modelfile shranimo in v terminal napišemo sledeče:
-- **ollama create <izbrano ime za nov model> -f ./modelfile**
-- da poženemo nov modificiran model: **ollama run <ime novega modela>**
+- 'ollama create <izbrano ime za nov model> -f ./modelfile'
+- da poženemo nov modificiran model: 'ollama run <ime novega modela>'
 
 # Python skripte in Langchain
 
@@ -142,14 +142,14 @@ O Langchain si lahko preberete tukaj: https://www.langchain.com
 tu je nekaj skript kjer sem skombiniral Langchain knjižnice in ollama za delanje povzetkov pdf dokumentov, spletnih strani in spletni vmesnik za lažjo interakcijo ki ni terminalska s knjižnico GrAdio
 
 Z inštalacijo Langchaina se inštalira zraven tudi veliko 'python dependecies' zato predlagam delovanje v virtualnem okolju 
-- **pip install venv** potegnemo skript za kreiranje virtualnih okolij
-- **python3 -m venv env** naredimo virtualno okolje
-- **source env/bin/activate** aktiviramo virtualno okolje
-- **pip install langchain** potegnemo langchain
-- **pip -r install requirements.txt** če imamo težavo z dependencies mormao izvesti še ta korak
+- 'pip install venv' potegnemo skript za kreiranje virtualnih okolij
+- 'python3 -m venv env' naredimo virtualno okolje
+- 'source env/bin/activate' aktiviramo virtualno okolje
+- 'pip install langchain' potegnemo langchain
+- 'pip -r install requirements.txt' če imamo težavo z dependencies mormao izvesti še ta korak
 
 - bralec ki povzame spletne strani:
-    
+
     '''
     # Uvoz potrebnih modulov iz knjižnice LANGCHAIN
     from langchain.llms import Ollama
@@ -293,4 +293,4 @@ Z inštalacijo Langchaina se inštalira zraven tudi veliko 'python dependecies' 
     iface.launch()
     '''
 
-- vse skripte lahko poženemo z komando **python3 <ime datoteke s kodo>**
+- vse skripte lahko poženemo z komando 'python3 <ime datoteke s kodo>'
