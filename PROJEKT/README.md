@@ -73,7 +73,6 @@ ollama je terminalna aplikacija ki vključuje vse zahtevane knjižnice ki so pot
 - 'curl https://ollama.ai/install.sh | sh' inštalira ollama
 - 'ollama serve' zašene proces ki se izvaja lokalno in je serviran na localhost:11434 po defoltu
 - pomoč za ollama:
-        '''
 
         Usage:
         ollama [flags]
@@ -94,7 +93,7 @@ ollama je terminalna aplikacija ki vključuje vse zahtevane knjižnice ki so pot
         Flags:
         -h, --help      help for ollama
         -v, --version   Show version information
-        '''
+        
 ## uporaba ollama
 
 sedaj lahko začnemo uporabljati ollama
