@@ -112,7 +112,7 @@ to naredimo z pomočjo MODELFILE
 - v visual studio code najprej dodamo add-on wsl, nato z klikom na spodnji levi gumb [><] pokonektamo wsl in visual studio
 - v novi mapi naredimo datoteko modelfile
 - primer model fila: 
-        '''
+        
         FROM llama2:latest #The FROM instruction defines the base model to use when creating a model.
 
         TEMPLATE """[INST] <<SYS>>{{ .System }}<</SYS>>
@@ -128,7 +128,7 @@ to naredimo z pomočjo MODELFILE
         PARAMETER num_gpu 22 #The number of layers to send to the GPU(s). 0 > only runs on CPU
         PARAMETER num_ctx 512 #Sets the size of the context window used to generate the next token
         PARAMETER num_thread 12 #Sets the number of threads to use during computation
-        '''
+        
 - več o modelfiles: https://github.com/jmorganca/ollama/blob/main/docs/modelfile.md
 - modelfile shranimo in v terminal napišemo sledeče:
 - 'ollama create <izbrano ime za nov model> -f ./modelfile'
@@ -149,147 +149,145 @@ Z inštalacijo Langchaina se inštalira zraven tudi veliko 'python dependecies' 
 
 - bralec ki povzame spletne strani:
 
-    '''
-    # Uvoz potrebnih modulov iz knjižnice LANGCHAIN
-    from langchain.llms import Ollama
-    from langchain.document_loaders import WebBaseLoader
-    from langchain.chains.summarize import load_summarize_chain
+    
+        # Uvoz potrebnih modulov iz knjižnice LANGCHAIN
+        from langchain.llms import Ollama
+        from langchain.document_loaders import WebBaseLoader
+        from langchain.chains.summarize import load_summarize_chain
 
-    # Ustvarjanje instance WebBaseLoader za nalaganje besedilnih dokumentov iz spletnega vira
-    loader = WebBaseLoader("https://en.wikipedia.org/wiki/2023_Plateau_State_massacres")
-    # Nalaganje besedil iz podanega spletnega vira
-    docs = loader.load()
+        # Ustvarjanje instance WebBaseLoader za nalaganje besedilnih dokumentov iz spletnega vira
+        loader = WebBaseLoader("https://en.wikipedia.org/wiki/2023_Plateau_State_massacres")
+        # Nalaganje besedil iz podanega spletnega vira
+        docs = loader.load()
 
-    # Ustvarjanje instance Ollama za uporabo določenega modela
-    llm = Ollama(model="LLAMA2_22_11_512")
-    #Nalaganje verige za povzemanje besedil s pomočjo modela Ollama
-    chain = load_summarize_chain(llm, chain_type="stuff")
+        # Ustvarjanje instance Ollama za uporabo določenega modela
+        llm = Ollama(model="LLAMA2_22_11_512")
+        #Nalaganje verige za povzemanje besedil s pomočjo modela Ollama
+        chain = load_summarize_chain(llm, chain_type="stuff")
 
-    # Zagon verige povzemanja na naloženih dokumentih
-    result = chain.run(docs)
-    # Izpis rezultata
-    print(result)
-    '''
+        # Zagon verige povzemanja na naloženih dokumentih
+        result = chain.run(docs)
+        # Izpis rezultata
+        print(result)
+        
 
 - bralec spletnih strani katerega lahko vprašaš vsebinska uprašanja
 
-    '''
-    from langchain.llms import Ollama
-    ollama = Ollama(base_url='http://localhost:11434',
-    model="LLAMA2_22_11_512")
 
-    from langchain.document_loaders import WebBaseLoader
-    loader = WebBaseLoader("https://en.wikipedia.org/wiki/2023_Plateau_State_massacres")
-    data = loader.load()
+        from langchain.llms import Ollama
+        ollama = Ollama(base_url='http://localhost:11434',
+        model="LLAMA2_22_11_512")
 
-    from langchain.text_splitter import RecursiveCharacterTextSplitter
+        from langchain.document_loaders import WebBaseLoader
+        loader = WebBaseLoader("https://en.wikipedia.org/wiki/2023_Plateau_State_massacres")
+        data = loader.load()
 
-    text_splitter=RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=20)
-    all_splits = text_splitter.split_documents(data)
+        from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-    from langchain.embeddings import OllamaEmbeddings
-    from langchain.vectorstores import Chroma
-    oembed = OllamaEmbeddings(base_url="http://localhost:11434", model="LLAMA2_22_11_512")
-    vectorstore = Chroma.from_documents(documents=all_splits, embedding=oembed)
+        text_splitter=RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=20)
+        all_splits = text_splitter.split_documents(data)
 
-    question="how many people died and how many were injured?"
-    docs = vectorstore.similarity_search(question)
-    len(docs)
+        from langchain.embeddings import OllamaEmbeddings
+        from langchain.vectorstores import Chroma
+        oembed = OllamaEmbeddings(base_url="http://localhost:11434", model="LLAMA2_22_11_512")
+        vectorstore = Chroma.from_documents(documents=all_splits, embedding=oembed)
 
-    from langchain.chains import RetrievalQA
-    qachain=RetrievalQA.from_chain_type(ollama, retriever=vectorstore.as_retriever())
-    result = qachain({"query": question})
-    print(result)
-    '''
+        question="how many people died and how many were injured?"
+        docs = vectorstore.similarity_search(question)
+        len(docs)
+
+        from langchain.chains import RetrievalQA
+        qachain=RetrievalQA.from_chain_type(ollama, retriever=vectorstore.as_retriever())
+        result = qachain({"query": question})
+        print(result)
+ 
 
 - Bralec pdf dokumentov, ki jih povzame:
 
-    '''
-    from langchain.llms import Ollama
-    from langchain.document_loaders import PyPDFLoader
-    from langchain.text_splitter import RecursiveCharacterTextSplitter
-    from langchain.embeddings import OllamaEmbeddings
-    from langchain.vectorstores import Chroma
-    from langchain.chains import RetrievalQA
+        
+        from langchain.llms import Ollama
+        from langchain.document_loaders import PyPDFLoader
+        from langchain.text_splitter import RecursiveCharacterTextSplitter
+        from langchain.embeddings import OllamaEmbeddings
+        from langchain.vectorstores import Chroma
+        from langchain.chains import RetrievalQA
 
-    # Inicializacija OLLAMA modela
-    ollama = Ollama(base_url='http://localhost:11434', model="LLAMA2_22_11_512")
+        # Inicializacija OLLAMA modela
+        ollama = Ollama(base_url='http://localhost:11434', model="LLAMA2_22_11_512")
 
-    # Naloži pdf dokument
-    pdf_loader = PyPDFLoader("/home/user/mashinlerning/Machine_Learning_for_Robust_Network_Design_A_New_Perspective.pdf")
-    data = pdf_loader.load()
+        # Naloži pdf dokument
+        pdf_loader = PyPDFLoader("/home/user/mashinlerning/Machine_Learning_for_Robust_Network_Design_A_New_Perspective.pdf")
+        data = pdf_loader.load()
 
-    # Zaradi dolžine teksta, tega dokumenta nemoremo naenkrat sprocesirati, zato tekst presekamo na več delov
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=20)
-    all_splits = text_splitter.split_documents(data)
+        # Zaradi dolžine teksta, tega dokumenta nemoremo naenkrat sprocesirati, zato tekst presekamo na več delov
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=20)
+        all_splits = text_splitter.split_documents(data)
 
-    oembed = OllamaEmbeddings(base_url="http://localhost:11434", model="LLAMA2_22_11_512")
-    vectorstore = Chroma.from_documents(documents=all_splits, embedding=oembed)
+        oembed = OllamaEmbeddings(base_url="http://localhost:11434", model="LLAMA2_22_11_512")
+        vectorstore = Chroma.from_documents(documents=all_splits, embedding=oembed)
 
-    # Uprašanja za model na podlagi danega teksta
-    question = "what is a GAT network"
+        # Uprašanja za model na podlagi danega teksta
+        question = "what is a GAT network"
 
-    # Iskanje podobnosti
-    docs = vectorstore.similarity_search(question)
-    print(f"Similar documents found: {len(docs)}")
-    qachain = RetrievalQA.from_chain_type(ollama, retriever=vectorstore.as_retriever())
+        # Iskanje podobnosti
+        docs = vectorstore.similarity_search(question)
+        print(f"Similar documents found: {len(docs)}")
+        qachain = RetrievalQA.from_chain_type(ollama, retriever=vectorstore.as_retriever())
 
-    # Dobljen rezultat ki ga izda LLM
-    result = qachain({"query": question})
-    print(result)
-    '''
+        # Dobljen rezultat ki ga izda LLM
+        result = qachain({"query": question})
+        print(result)
 
 - spletni grafični vmesnik (web gui)
 
-    '''
-    # Uvoz potrebnih knjižnic
-    import requests # Za pošiljanje HTTP zahtevkov
-    import json # Za delo s JSON podatki
-    import gradio as gr # Za ustvarjanje vmesnika
 
-    # URL, ki vodi do strežnika z LLM-om(do našega porta na katerem ponujamo storitev)
-    url = "http://localhost:11434/api/generate"
+        # Uvoz potrebnih knjižnic
+        import requests # Za pošiljanje HTTP zahtevkov
+        import json # Za delo s JSON podatki
+        import gradio as gr # Za ustvarjanje vmesnika
 
-    # Definicija zaglavij za HTTP zahtevke
-    headers = {
-        'Content-Type': 'application/json',
-    }
+        # URL, ki vodi do strežnika z LLM-om(do našega porta na katerem ponujamo storitev)
+        url = "http://localhost:11434/api/generate"
 
-    # Seznam za shranjevanje zgodovine pogovora
-    conversation_history = []
-
-    # Funkcija, ki generira odziv na podlagi podanega spodbujevalnega besedila
-    def generate_response(prompt):
-        conversation_history.append(prompt) #dodajanje v zgodovino
-
-        full_prompt = "\n".join(conversation_history) #združitev zgodovine
-        # Pripravi podatke za zahtevek na strežnik z LLM-om
-        data = {
-            "model": "LLAMA2_22_11_512", # Določi model
-            "stream": False,
-            "prompt": full_prompt, # Celotno zgodovino pogovora uporabi kot spodbudo
+        # Definicija zaglavij za HTTP zahtevke
+        headers = {
+            'Content-Type': 'application/json',
         }
-        # Pošlji POST zahtevek na določen URL s pripravljenimi podatki in zaglavji
-        response = requests.post(url, headers=headers, data=json.dumps(data))
-        # Preveri, ali je bil odgovor uspešen (status 200)
-        if response.status_code == 200:
-            response_text = response.text
-            data = json.loads(response_text)
-            actual_response = data["response"] # Pridobi generiran odgovor iz prejetih podatkov
-            conversation_history.append(actual_response) # Dodaj odgovor v zgodovino pogovora
-            return actual_response # Vrni generiran odgovor
-        else:
-            print("Error:", response.status_code, response.text) # V primeru napake izpiši podrobnosti
-            return None # Vrnemo None v primeru napake
 
-    # Ustvari vmesnik Gradio
-    iface = gr.Interface(
-        fn=generate_response, # Uporabi funkcijo generate_response kot osnovno funkcijo vmesnika
-        inputs=gr.Textbox(lines=2, placeholder="Enter your prompt here..."), # Vhodno polje za vnos besedila
-        outputs="text" # Prikaži izhodni tekst
-    )
-    # Zaženi vmesnik
-    iface.launch()
-    '''
+        # Seznam za shranjevanje zgodovine pogovora
+        conversation_history = []
 
+        # Funkcija, ki generira odziv na podlagi podanega spodbujevalnega besedila
+        def generate_response(prompt):
+            conversation_history.append(prompt) #dodajanje v zgodovino
+
+            full_prompt = "\n".join(conversation_history) #združitev zgodovine
+            # Pripravi podatke za zahtevek na strežnik z LLM-om
+            data = {
+                "model": "LLAMA2_22_11_512", # Določi model
+                "stream": False,
+                "prompt": full_prompt, # Celotno zgodovino pogovora uporabi kot spodbudo
+            }
+            # Pošlji POST zahtevek na določen URL s pripravljenimi podatki in zaglavji
+            response = requests.post(url, headers=headers, data=json.dumps(data))
+            # Preveri, ali je bil odgovor uspešen (status 200)
+            if response.status_code == 200:
+                response_text = response.text
+                data = json.loads(response_text)
+                actual_response = data["response"] # Pridobi generiran odgovor iz prejetih podatkov
+                conversation_history.append(actual_response) # Dodaj odgovor v zgodovino pogovora
+                return actual_response # Vrni generiran odgovor
+            else:
+                print("Error:", response.status_code, response.text) # V primeru napake izpiši podrobnosti
+                return None # Vrnemo None v primeru napake
+
+        # Ustvari vmesnik Gradio
+        iface = gr.Interface(
+            fn=generate_response, # Uporabi funkcijo generate_response kot osnovno funkcijo vmesnika
+            inputs=gr.Textbox(lines=2, placeholder="Enter your prompt here..."), # Vhodno polje za vnos besedila
+            outputs="text" # Prikaži izhodni tekst
+        )
+        # Zaženi vmesnik
+        iface.launch()
+    
 - vse skripte lahko poženemo z komando 'python3 <ime datoteke s kodo>'
