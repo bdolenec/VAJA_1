@@ -20,7 +20,7 @@ python main.py : {
 	loader = WebBaseLoader("https://en.wikipedia.org/wiki/2023_Plateau_State_massacres")
 	docs = loader.load()
 
-	llm = Ollama(model="LLAMA2_22_11_512")
+	llm = Ollama(model="YOUR_LLM")
 	chain = load_summarize_chain(llm, chain_type="stuff")
 
 	result = chain.run(docs)
